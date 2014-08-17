@@ -8,8 +8,8 @@ import model.swagger._
 object logReader {
 
   def main(args: Array[String]) {
-    val log = readLog
-    println(log)
+    val logData = readLog
+    println(logData)
   }
 
   val readLogEntry = (__).read[List[LogEntry]]

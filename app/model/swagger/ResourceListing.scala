@@ -4,5 +4,5 @@ case class ResourceListing(
   apiVersion: String,
   swaggerVersion: String,
   apis: Seq[Resource],
-  authorizations: Seq[Authorization],
-  info: Info)
+  authorizations: Option[Seq[Authorization]],
+  info: Option[Info])
