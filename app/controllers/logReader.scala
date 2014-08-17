@@ -48,7 +48,10 @@ object logReader {
     val filename = "sample_api_traffic.log2"
     val content = Source.fromFile(filename).mkString
     val json = Json.parse(content)
-    val logData = json.validate(readLogEntry)
+    val logData = json.validate(readLogEntry) match {
+      case s: JsSuccess[List[LogEntry]] => s.get
+      case e: JsError => println("Errors: " + JsError.toFlatJson(e).toString)
+    }
     println(logData)
   }
 }
