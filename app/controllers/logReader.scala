@@ -2,13 +2,14 @@ package controllers
 
 import scala.io.Source
 import play.api.libs.json._
-import model._
+import model.log._
+import model.swagger._
 
 object logReader {
 
   def main(args: Array[String]) {
     val log = readLog
-    //    println(log.length)
+    println(log)
   }
 
   val readLogEntry = (__).read[List[LogEntry]]
@@ -17,10 +18,9 @@ object logReader {
     val filename = "sample_api_traffic.log2"
     val content = Source.fromFile(filename).mkString
     val json = Json.parse(content)
-    val logData = json.validate(readLogEntry) match {
+    json.validate(readLogEntry) match {
       case s: JsSuccess[List[LogEntry]] => s.get
       case e: JsError => println("Errors: " + JsError.toFlatJson(e).toString)
     }
-    println(logData)
   }
 }
